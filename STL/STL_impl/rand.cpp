@@ -3,6 +3,7 @@
 using namespace std;
 /*
  based on  Linear Congruential Generator (LCG)     seed = (a*seed+c)%m;
+ tc - O(1)
 ​
 
 */
