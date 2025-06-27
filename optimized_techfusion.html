@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFusion 2025 - AI & Web Development Summit</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .navbar { 
+            backdrop-filter: blur(10px); 
+            background: rgba(255,255,255,0.95) !important;
+        }
+        
+        .hero-bg { 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            min-height: 100vh;
+        }
+        
+        .countdown-timer { 
+            background: rgba(255,255,255,0.1); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .countdown-number { 
+            font-size: 2.5rem; 
+            color: var(--accent); 
+        }
+        
+        .card-hover:hover { 
+            transform: translateY(-5px); 
+            transition: all 0.3s ease;
+        }
+        
+        .glass-form { 
+            background: rgba(255,255,255,0.1); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .form-control, .form-select { 
+            background: rgba(255,255,255,0.1); 
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+        }
+        
+        .form-control::placeholder { 
+            color: rgba(255,255,255,0.7); 
+        }
+        
+        .form-control:focus, .form-select:focus { 
+            background: rgba(255,255,255,0.2); 
+            border-color: var(--accent);
+            box-shadow: 0 0 0 0.2rem rgba(240,147,251,0.25);
+            color: white;
+        }
+        
+        .form-select option { 
+            background: #2c3e50; 
+            color: white; 
+        }
+        
+        .btn-gradient { 
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .progress-bar { 
+            background: linear-gradient(90deg, var(--accent), var(--primary)); 
+        }
+        
+        .speaker-avatar { 
+            width: 120px; 
+            height: 120px; 
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+        
+        .modal-header { 
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+        }
+        
+        .section-divider::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            display: block;
+            margin: 20px auto;
+        }
+        
+        @media (max-width: 576px) {
+            .countdown-number { font-size: 1.8rem; }
+            .hero-bg { min-height: 80vh; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary fs-4" href="#home">
+                <i class="fas fa-code"></i> TechFusion 2025
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#schedule">Schedule</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#speakers">Speakers</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#register">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white d-flex align-items-center">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">TechFusion 2025</h1>
+            <p class="lead mb-2">AI & Web Development Summit</p>
+            <p class="fs-5 mb-5">Join industry leaders for two days of cutting-edge technology, innovation, and networking</p>
+            
+            <!-- Countdown Timer -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-8">
+                    <div class="countdown-timer rounded-4 p-4">
+                        <h3 class="mb-4">Event Starts In</h3>
+                        <div class="row g-2" id="countdown">
+                            <div class="col-3">
+                                <div class="countdown-number fw-bold" id="days">00</div>
+                                <small class="opacity-75">Days</small>
+                            </div>
+                            <div class="col-3">
+                                <div class="countdown-number fw-bold" id="hours">00</div>
+                                <small class="opacity-75">Hours</small>
+                            </div>
+                            <div class="col-3">
+                                <div class="countdown-number fw-bold" id="minutes">00</div>
+                                <small class="opacity-75">Minutes</small>
+                            </div>
+                            <div class="col-3">
+                                <div class="countdown-number fw-bold" id="seconds">00</div>
+                                <small class="opacity-75">Seconds</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Event Info -->
+            <div class="row text-center">
+                <div class="col-md-4 mb-3">
+                    <i class="fas fa-calendar-alt fa-2x mb-2"></i>
+                    <h5>Date</h5>
+                    <p class="mb-0">July 15-16, 2025</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <i class="fas fa-map-marker-alt fa-2x mb-2"></i>
+                    <h5>Location</h5>
+                    <p class="mb-0">Tech Convention Center<br>San Francisco, CA</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <i class="fas fa-users fa-2x mb-2"></i>
+                    <h5>Attendees</h5>
+                    <p class="mb-0">500+ Tech Professionals</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-2 section-divider">Event Schedule</h2>
+            <div class="row">
+                <!-- Day 1 -->
+                <div class="col-lg-6">
+                    <h4 class="text-center mb-4">Day 1 - July 15, 2025</h4>
+                    <div class="card mb-3 border-0 shadow-sm card-hover">
+                        <div class="card-body">
+                            <div class="text-primary fw-bold mb-2">9:00 AM - 9:30 AM</div>
+                            <h6 class="card-title">Registration & Welcome Coffee</h6>
+                            <p class="card-text small text-muted">Network with fellow developers and grab some coffee to start the day</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3 border-0 shadow-sm card-hover">
+                        <div class="card-body">
+                            <div class="text-primary fw-bold mb-2">9:30 AM - 10:30 AM</div>
+                            <h6 class="card-title">Keynote: The Future of AI in Web Development</h6>
+                            <p class="card-text small text-muted">Dr. Sarah Chen explores how AI is revolutionizing web development</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3 border-0 shadow-sm card-hover">
+                        <div class="card-body">
+                            <div class="text-primary fw-bold mb-2">11:00 AM - 12:00 PM</div>
+                            <h6 class="card-title">Building Scalable React Applications</h6>
+                            <p class="card-text small text-muted">Best practices for enterprise-level React development</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3 border-0 shadow-sm card-hover">
+                        <div class="card-body">
+                            <div class="text-primary fw-bold mb-2">2:00 PM - 3:00 PM</div>
+                            <h6 class="card-title">Machine Learning for Frontend Developers</h6>
+                            <p class="card-text small text-muted">Integrating ML models into web applications</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Day 2 -->
+                <div class="col-lg-6">
+                    <h4 class="text-center mb-4">Day 2 - July 16, 2025</h4>
+                    <div class="card mb-3 border-0 shadow-sm card-hover">
+                        <div class="card-body">
+                            <div class="text-primary fw-bold mb-2">9:00 AM - 10:00 AM</div>
+                            <h6 class="card-title">Advanced CSS & Animation Techniques</h6>
+                            <p class="card-text small text-muted">Creating stunning animations and responsive designs</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3 border-0 shadow-sm card-hover">
+                        <div class="card-body">
+                            <div class="text-primary fw-bold mb-2">10:30 AM - 11:30 AM</div>
+                            <h6 class="card-title">Cloud Architecture for Modern Apps</h6>
+                            <p class="card-text small text-muted">Designing scalable cloud-native applications</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3 border-0 shadow-sm card-hover">
+                        <div class="card-body">
+                            <div class="text-primary fw-bold mb-2">1:00 PM - 2:00 PM</div>
+                            <h6 class="card-title">Security Best Practices</h6>
+                            <p class="card-text small text-muted">Protecting your applications from modern threats</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3 border-0 shadow-sm card-hover">
+                        <div class="card-body">
+                            <div class="text-primary fw-bold mb-2">3:00 PM - 4:00 PM</div>
+                            <h6 class="card-title">Panel Discussion & Networking</h6>
+                            <p class="card-text small text-muted">Q&A with all speakers and final networking session</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section id="speakers" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 section-divider">Featured Speakers</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100 border-0 shadow text-center card-hover" role="button" data-bs-toggle="modal" data-bs-target="#speaker1Modal">
+                        <div class="card-body p-4">
+                            <div class="speaker-avatar rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user fa-2x text-white"></i>
+                            </div>
+                            <h5 class="card-title">Dr. Sarah Chen</h5>
+                            <p class="text-muted mb-2">AI Research Director</p>
+                            <small class="text-muted">Google AI - 15+ years in machine learning and web technologies</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100 border-0 shadow text-center card-hover" role="button" data-bs-toggle="modal" data-bs-target="#speaker2Modal">
+                        <div class="card-body p-4">
+                            <div class="speaker-avatar rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user fa-2x text-white"></i>
+                            </div>
+                            <h5 class="card-title">Mike Rodriguez</h5>
+                            <p class="text-muted mb-2">Senior Frontend Architect</p>
+                            <small class="text-muted">Netflix - Expert in React and scalable frontend systems</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100 border-0 shadow text-center card-hover" role="button" data-bs-toggle="modal" data-bs-target="#speaker3Modal">
+                        <div class="card-body p-4">
+                            <div class="speaker-avatar rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user fa-2x text-white"></i>
+                            </div>
+                            <h5 class="card-title">Emma Thompson</h5>
+                            <p class="text-muted mb-2">Cloud Solutions Architect</p>
+                            <small class="text-muted">Amazon Web Services - Specialist in serverless architectures</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100 border-0 shadow text-center card-hover" role="button" data-bs-toggle="modal" data-bs-target="#speaker4Modal">
+                        <div class="card-body p-4">
+                            <div class="speaker-avatar rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user fa-2x text-white"></i>
+                            </div>
+                            <h5 class="card-title">Alex Kumar</h5>
+                            <p class="text-muted mb-2">Security Engineer</p>
+                            <small class="text-muted">Microsoft - Cybersecurity expert with focus on web application security</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="py-5" style="background: linear-gradient(135deg, #2c3e50, #34495e);">
+        <div class="container">
+            <h2 class="text-center text-white mb-5 section-divider">Register Now</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="glass-form rounded-4 p-4">
+                        <!-- Progress Bar -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between text-white mb-2">
+                                <span>Registration Progress</span>
+                                <span id="progress-text">0%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar rounded-pill" id="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <form id="registrationForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label text-white">First Name *</label>
+                                    <input type="text" class="form-control rounded-3" id="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label text-white">Last Name *</label>
+                                    <input type="text" class="form-control rounded-3" id="lastName" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-white">Email Address *</label>
+                                <input type="email" class="form-control rounded-3" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-white">Phone Number</label>
+                                <input type="tel" class="form-control rounded-3" id="phone">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label text-white">Company</label>
+                                    <input type="text" class="form-control rounded-3" id="company">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label text-white">Job Title</label>
+                                    <input type="text" class="form-control rounded-3" id="jobTitle">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-white">Experience Level *</label>
+                                <select class="form-select rounded-3" id="experience" required>
+                                    <option value="">Select your experience level</option>
+                                    <option value="beginner">Beginner (0-2 years)</option>
+                                    <option value="intermediate">Intermediate (3-5 years)</option>
+                                    <option value="advanced">Advanced (6-10 years)</option>
+                                    <option value="expert">Expert (10+ years)</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-white">Areas of Interest (Select all that apply)</label>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="ai" id="interest1">
+                                            <label class="form-check-label text-white-50" for="interest1">Artificial Intelligence</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="react" id="interest2">
+                                            <label class="form-check-label text-white-50" for="interest2">React Development</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="cloud" id="interest3">
+                                            <label class="form-check-label text-white-50" for="interest3">Cloud Architecture</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="security" id="interest4">
+                                            <label class="form-check-label text-white-50" for="interest4">Web Security</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="css" id="interest5">
+                                            <label class="form-check-label text-white-50" for="interest5">CSS & Animation</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="ml" id="interest6">
+                                            <label class="form-check-label text-white-50" for="interest6">Machine Learning</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-white">Dietary Restrictions</label>
+                                <textarea class="form-control rounded-3" id="dietary" rows="2" placeholder="Please specify any dietary restrictions or allergies"></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="newsletter">
+                                    <label class="form-check-label text-white-50" for="newsletter">
+                                        Subscribe to our newsletter for future events and tech updates
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-gradient btn-lg w-100 rounded-3 fw-semibold">
+                                <i class="fas fa-paper-plane me-2"></i>Register Now
+                            </button>
+                        </form>
+
+                        <!-- Success Message -->
+                        <div class="alert alert-success rounded-3 mt-4 d-none" id="confirmationMessage">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle fa-2x me-3"></i>
+                                <div>
+                                    <h5 class="alert-heading mb-1">Registration Successful!</h5>
+                                    <p class="mb-0">Thank you for registering! You'll receive a confirmation email shortly with event details and your QR code ticket.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speaker Modals -->
+    <div class="modal fade" id="speaker1Modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-white">
+                    <h5 class="modal-title">Dr. Sarah Chen</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="speaker-avatar rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 150px; height: 150px;">
+                                <i class="fas fa-user fa-3x text-white"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>AI Research Director at Google AI</h5>
+                            <p class="text-muted mb-3">15+ years in machine learning and web technologies</p>
+                            <p><strong>About:</strong> Dr. Sarah Chen is a leading researcher in artificial intelligence with a focus on practical applications in web development. She has published over 50 papers on machine learning and has been instrumental in developing AI-powered development tools.</p>
+                            <p><strong>Session:</strong> "The Future of AI in Web Development" - Explore how AI is revolutionizing the way we build, test, and deploy web applications.</p>
+                            <div class="mt-3">
+                                <span class="badge bg-primary me-2">Machine Learning</span>
+                                <span class="badge bg-primary me-2">AI Research</span>
+                                <span class="badge bg-primary me-2">Web Technologies</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Speaker Modals (2, 3, 4) -->
+    <div class="modal fade" id="speaker2Modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-white">
+                    <h5 class="modal-title">Mike Rodriguez</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="speaker-avatar rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 150px; height: 150px;">
+                                <i class="fas fa-user fa-3x text-white"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>Senior Frontend Architect at Netflix</h5>
+                            <p class="text-muted mb-3">Expert in React and scalable frontend systems</p>
+                            <p><strong>About:</strong> Mike has been leading frontend architecture at Netflix, handling millions of users daily. He's passionate about performance optimization and building scalable React applications that can handle massive traffic.</p>
+                            <p><strong>Session:</strong> "Building Scalable React Applications" - Learn the patterns and practices used at Netflix to build React apps that scale.</p>
+                            <div class="mt-3">
+                                <span class="badge bg-primary me-2">React</span>
+                                <span class="badge bg-primary me-2">Frontend Architecture</span>
+                                <span class="badge bg-primary me-2">Performance</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="speaker3Modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-white">
+                    <h5 class="modal-title">Emma Thompson</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="speaker-avatar rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 150px; height: 150px;">
+                                <i class="fas fa-user fa-3x text-white"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>Cloud Solutions Architect at Amazon Web Services</h5>
+                            <p class="text-muted mb-3">Specialist in serverless architectures</p>
+                            <p><strong>About:</strong> Emma Thompson is a certified AWS Solutions Architect with a deep understanding of cloud computing. She helps companies design and deploy highly scalable, cost-effective, and secure applications in the cloud.</p>
+                            <p><strong>Session:</strong> "Cloud Architecture for Modern Apps" - An in-depth look at designing and building serverless and microservices-based applications on AWS.</p>
+                            <div class="mt-3">
+                                <span class="badge bg-primary me-2">Cloud Computing</span>
+                                <span class="badge bg-primary me-2">AWS</span>
+                                <span class="badge bg-primary me-2">Serverless</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="speaker4Modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-white">
+                    <h5 class="modal-title">Alex Kumar</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="speaker-avatar rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 150px; height: 150px;">
+                                <i class="fas fa-user fa-3x text-white"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>Security Engineer at Microsoft</h5>
+                            <p class="text-muted mb-3">Cybersecurity expert with focus on web application security</p>
+                            <p><strong>About:</strong> Alex Kumar is a cybersecurity professional who specializes in identifying and mitigating security vulnerabilities in web applications. He is a proponent of "security by design" and has contributed to several open-source security tools.</p>
+                            <p><strong>Session:</strong> "Security Best Practices" - Learn how to defend your applications against common threats like XSS,
