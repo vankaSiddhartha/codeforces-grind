@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFusion 2025 - AI & Web Development Summit</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+        }
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--dark-color) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 100px 0 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .countdown-timer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .countdown-item {
+            text-align: center;
+            margin: 0 10px;
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+            color: var(--accent-color);
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: var(--light-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--dark-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            display: block;
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        .schedule-item {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .schedule-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .schedule-time {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .speaker-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .speaker-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .form-section {
+            background: linear-gradient(135deg, var(--dark-color), #34495e);
+            color: white;
+        }
+
+        .registration-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-control, .form-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: white;
+            padding: 12px 15px;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(240, 147, 251, 0.25);
+            color: white;
+        }
+
+        .form-select option {
+            background: var(--dark-color);
+            color: white;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .form-check-label {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .progress-container {
+            margin-bottom: 30px;
+        }
+
+        .progress {
+            height: 8px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border: none;
+            border-radius: 12px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .confirmation-message {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .countdown-number {
+                font-size: 1.8rem;
+            }
+            
+            .hero-section {
+                padding: 50px 0 30px;
+            }
+            
+            .section {
+                padding: 50px 0;
+            }
+        }
+
+        .animate-fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-code"></i> TechFusion 2025
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#schedule">Schedule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#speakers">Speakers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#register">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="hero-content text-center">
+                <h1 class="display-4 fw-bold mb-4">TechFusion 2025</h1>
+                <p class="lead mb-4">AI & Web Development Summit</p>
+                <p class="fs-5 mb-4">Join industry leaders for two days of cutting-edge technology, innovation, and networking</p>
+                
+                <!-- Event Details -->
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="countdown-timer">
+                            <h3 class="mb-4">Event Starts In</h3>
+                            <div class="row" id="countdown">
+                                <div class="col-3 countdown-item">
+                                    <span class="countdown-number" id="days">00</span>
+                                    <span class="countdown-label">Days</span>
+                                </div>
+                                <div class="col-3 countdown-item">
+                                    <span class="countdown-number" id="hours">00</span>
+                                    <span class="countdown-label">Hours</span>
+                                </div>
+                                <div class="col-3 countdown-item">
+                                    <span class="countdown-number" id="minutes">00</span>
+                                    <span class="countdown-label">Minutes</span>
+                                </div>
+                                <div class="col-3 countdown-item">
+                                    <span class="countdown-number" id="seconds">00</span>
+                                    <span class="countdown-label">Seconds</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-5">
+                            <div class="col-md-4 mb-3">
+                                <i class="fas fa-calendar-alt fa-2x mb-2"></i>
+                                <h5>Date</h5>
+                                <p>July 15-16, 2025</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <i class="fas fa-map-marker-alt fa-2x mb-2"></i>
+                                <h5>Location</h5>
+                                <p>Tech Convention Center<br>San Francisco, CA</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <i class="fas fa-users fa-2x mb-2"></i>
+                                <h5>Attendees</h5>
+                                <p>500+ Tech Professionals</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="section">
+        <div class="container">
+            <h2 class="section-title">Event Schedule</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4 class="mb-4 text-center">Day 1 - July 15, 2025</h4>
+                    <div class="schedule-item animate-fade-in">
+                        <div class="schedule-time">9:00 AM - 9:30 AM</div>
+                        <h5>Registration & Welcome Coffee</h5>
+                        <p>Network with fellow developers and grab some coffee to start the day</p>
+                    </div>
+                    <div class="schedule-item animate-fade-in">
+                        <div class="schedule-time">9:30 AM - 10:30 AM</div>
+                        <h5>Keynote: The Future of AI in Web Development</h5>
+                        <p>Dr. Sarah Chen explores how AI is revolutionizing web development</p>
+                    </div>
+                    <div class="schedule-item animate-fade-in">
+                        <div class="schedule-time">11:00 AM - 12:00 PM</div>
+                        <h5>Building Scalable React Applications</h5>
+                        <p>Best practices for enterprise-level React development</p>
+                    </div>
+                    <div class="schedule-item animate-fade-in">
+                        <div class="schedule-time">2:00 PM - 3:00 PM</div>
+                        <h5>Machine Learning for Frontend Developers</h5>
+                        <p>Integrating ML models into web applications</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h4 class="mb-4 text-center">Day 2 - July 16, 2025</h4>
+                    <div class="schedule-item animate-fade-in">
+                        <div class="schedule-time">9:00 AM - 10:00 AM</div>
+                        <h5>Advanced CSS & Animation Techniques</h5>
+                        <p>Creating stunning animations and responsive designs</p>
+                    </div>
+                    <div class="schedule-item animate-fade-in">
+                        <div class="schedule-time">10:30 AM - 11:30 AM</div>
+                        <h5>Cloud Architecture for Modern Apps</h5>
+                        <p>Designing scalable cloud-native applications</p>
+                    </div>
+                    <div class="schedule-item animate-fade-in">
+                        <div class="schedule-time">1:00 PM - 2:00 PM</div>
+                        <h5>Security Best Practices</h5>
+                        <p>Protecting your applications from modern threats</p>
+                    </div>
+                    <div class="schedule-item animate-fade-in">
+                        <div class="schedule-time">3:00 PM - 4:00 PM</div>
+                        <h5>Panel Discussion & Networking</h5>
+                        <p>Q&A with all speakers and final networking session</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section id="speakers" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Speakers</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="speaker-card animate-fade-in" data-bs-toggle="modal" data-bs-target="#speaker1Modal">
+                        <div class="speaker-img">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h5>Dr. Sarah Chen</h5>
+                        <p class="text-muted">AI Research Director</p>
+                        <p><small>Google AI - 15+ years in machine learning and web technologies</small></p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="speaker-card animate-fade-in" data-bs-toggle="modal" data-bs-target="#speaker2Modal">
+                        <div class="speaker-img">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h5>Mike Rodriguez</h5>
+                        <p class="text-muted">Senior Frontend Architect</p>
+                        <p><small>Netflix - Expert in React and scalable frontend systems</small></p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="speaker-card animate-fade-in" data-bs-toggle="modal" data-bs-target="#speaker3Modal">
+                        <div class="speaker-img">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h5>Emma Thompson</h5>
+                        <p class="text-muted">Cloud Solutions Architect</p>
+                        <p><small>Amazon Web Services - Specialist in serverless architectures</small></p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="speaker-card animate-fade-in" data-bs-toggle="modal" data-bs-target="#speaker4Modal">
+                        <div class="speaker-img">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h5>Alex Kumar</h5>
+                        <p class="text-muted">Security Engineer</p>
+                        <p><small>Microsoft - Cybersecurity expert with focus on web application security</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="section form-section">
+        <div class="container">
+            <h2 class="section-title text-white">Register Now</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="registration-form">
+                        <div class="progress-container">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Registration Progress</span>
+                                <span id="progress-text">0%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <form id="registrationForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">First Name *</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Last Name *</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Company</label>
+                                <input type="text" class="form-control" id="company">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Job Title</label>
+                                <input type="text" class="form-control" id="jobTitle">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Experience Level *</label>
+                                <select class="form-select" id="experience" required>
+                                    <option value="">Select your experience level</option>
+                                    <option value="beginner">Beginner (0-2 years)</option>
+                                    <option value="intermediate">Intermediate (3-5 years)</option>
+                                    <option value="advanced">Advanced (6-10 years)</option>
+                                    <option value="expert">Expert (10+ years)</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Areas of Interest (Select all that apply)</label>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="ai" id="interest1">
+                                            <label class="form-check-label" for="interest1">Artificial Intelligence</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="react" id="interest2">
+                                            <label class="form-check-label" for="interest2">React Development</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="cloud" id="interest3">
+                                            <label class="form-check-label" for="interest3">Cloud Architecture</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="security" id="interest4">
+                                            <label class="form-check-label" for="interest4">Web Security</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="css" id="interest5">
+                                            <label class="form-check-label" for="interest5">CSS & Animation</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="ml" id="interest6">
+                                            <label class="form-check-label" for="interest6">Machine Learning</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Dietary Restrictions</label>
+                                <textarea class="form-control" id="dietary" rows="2" placeholder="Please specify any dietary restrictions or allergies"></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="newsletter">
+                                    <label class="form-check-label" for="newsletter">
+                                        Subscribe to our newsletter for future events and tech updates
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="fas fa-paper-plane me-2"></i>Register Now
+                            </button>
+                        </form>
+
+                        <div class="confirmation-message" id="confirmationMessage">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle fa-2x me-3"></i>
+                                <div>
+                                    <h5 class="mb-1">Registration Successful!</h5>
+                                    <p class="mb-0">Thank you for registering! You'll receive a confirmation email shortly with event details and your QR code ticket.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speaker Modals -->
+    <div class="modal fade" id="speaker1Modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Dr. Sarah Chen</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="speaker-img mx-auto mb-3" style="width: 150px; height: 150px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>AI Research Director at Google AI</h5>
+                            <p class="text-muted mb-3">15+ years in machine learning and web technologies</p>
+                            <p><strong>About:</strong> Dr. Sarah Chen is a leading researcher in artificial intelligence with a focus on practical applications in web development. She has published over 50 papers on machine learning and has been instrumental in developing AI-powered development tools.</p>
+                            <p><strong>Session:</strong> "The Future of AI in Web Development" - Explore how AI is revolutionizing the way we build, test, and deploy web applications.</p>
+                            <div class="mt-3">
+                                <span class="badge bg-primary me-2">Machine Learning</span>
+                                <span class="badge bg-primary me-2">AI Research</span>
+                                <span class="badge bg-primary me-2">Web Technologies</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="speaker2Modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Mike Rodriguez</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="speaker-img mx-auto mb-3" style="width: 150px; height: 150px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>Senior Frontend Architect at Netflix</h5>
+                            <p class="text-muted mb-3">Expert in React and scalable frontend systems</p>
+                            <p><strong>About:</strong> Mike has been leading frontend architecture at Netflix, handling millions of users daily. He's passionate about performance optimization and building scalable React applications that can handle massive traffic.</p>
+                            <p><strong>Session:</strong> "Building Scalable React Applications" - Learn the patterns and practices used at Netflix to build React apps that scale.</p>
+                            <div class="mt-3">
+                                <span class="badge bg-primary me-2">React</span>
+                                <span class="badge bg-primary me-2">Frontend Architecture</span>
+                                <span class="badge bg-primary me-2">Performance</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="speaker3Modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Emma Thompson</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="speaker-img mx-auto mb-3" style="width: 150px; height: 150px;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5>Cloud Solutions Architect at Amazon Web Services</h5>
+                            <p class="text-muted mb-3">Specialist in serverless architectures</p>
+                            <p><strong>About:</strong> Emma is a cloud solutions architect at AWS with expertise in designing and implementing serverless architectures. She helps organizations migrate to cloud-native solutions and optimize their infrastructure for scalability and cost-effectiveness.</p>
+                            <p><strong>Session:</strong> "Cloud Architecture for Modern Apps" -
